@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة — آفاق تيتان</title>
+<link rel="stylesheet" href="../public/fonts/fonts.css">
+<style>
+@page { size: A4; margin: 0; }
+:root { --ink:#0D0D0D; --char:#1C1C1C; --steel:#3A3A3A; --copper:#B87333; --ember:#EA6600; --txt:#e6e1da; --mut:#9b948a; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: "Noto Sans Arabic", sans-serif; color: var(--txt); font-size: 10.6pt; line-height: 1.85; }
+.page { width: 210mm; height: 297mm; background: var(--ink); position: relative; overflow: hidden; page-break-after: always; break-after: page; padding: 26mm 20mm 22mm; margin: 0 auto; }
+.page:last-child { page-break-after: auto; break-after: auto; }
+@media screen { .page { margin: 10px auto; } }
+.hd { position: absolute; top: 0; right: 0; left: 0; height: 17mm; display: flex; align-items: center; justify-content: space-between; padding: 0 20mm; border-bottom: .3mm solid var(--steel); }
+.hd img { height: 9.5mm; }
+.hd span { font-family: "Noto Kufi Arabic"; font-size: 8.5pt; color: var(--mut); }
+.ft { position: absolute; bottom: 0; right: 0; left: 0; height: 13mm; display: flex; align-items: center; justify-content: space-between; padding: 0 20mm; font-size: 8pt; color: var(--mut); border-top: .3mm solid var(--steel); }
+.ft b { color: var(--copper); font-family: "Noto Kufi Arabic"; }
+.num { display: inline-block; background: var(--copper); color: var(--ink); font-family: "Noto Kufi Arabic"; font-weight: 700; font-size: 11pt; padding: 1mm 4mm; margin-bottom: 4mm; }
+h1 { font-family: "Noto Kufi Arabic"; font-weight: 700; font-size: 25pt; line-height: 1.45; color: var(--copper); margin-bottom: 3mm; }
+h2 { font-family: "Noto Kufi Arabic"; font-weight: 600; font-size: 14pt; color: var(--copper); margin: 7mm 0 2.5mm; }
+h3 { font-family: "Noto Kufi Arabic"; font-weight: 600; font-size: 11.5pt; color: #f0e9de; margin-bottom: 1.5mm; }
+.rule { height: .6mm; width: 28mm; background: var(--ember); margin: 0 0 7mm; }
+p { margin-bottom: 3.5mm; }
+.lead { font-size: 12pt; color: #f0e9de; line-height: 1.95; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+.card { background: var(--char); border: .3mm solid var(--steel); border-right: 1mm solid var(--copper); padding: 4.5mm 5mm; }
+.card p { margin: 0; font-size: 10pt; color: #cfc8bf; line-height: 1.8; }
+.card.plain { border-right: .3mm solid var(--steel); }
+ul.chk { list-style: none; }
+ul.chk li { position: relative; padding-right: 7mm; margin-bottom: 2.6mm; }
+ul.chk li::before { content: ""; position: absolute; right: 0; top: 3.2mm; width: 3mm; height: 3mm; background: var(--copper); transform: rotate(45deg) scale(.8); }
+.quote { background: var(--char); border-right: 1.2mm solid var(--ember); padding: 5mm 6mm; font-size: 11pt; color: #f0e9de; }
+.tag { font-family: "Noto Kufi Arabic"; font-size: 8.5pt; color: var(--copper); border: .3mm solid var(--copper); padding: .4mm 2.5mm; display: inline-block; margin-left: 2mm; }
+table { width: 100%; border-collapse: collapse; font-size: 9.6pt; }
+th { background: var(--char); color: var(--copper); font-family: "Noto Kufi Arabic"; font-weight: 600; text-align: right; padding: 2.5mm 3.5mm; border: .3mm solid var(--steel); }
+td { padding: 2.5mm 3.5mm; border: .3mm solid var(--steel); vertical-align: top; color: #d8d1c6; }
+.ltr { direction: ltr; unicode-bidi: embed; font-family: "Noto Sans Arabic"; color: #f0e9de; }
+.note { font-size: 9pt; color: var(--mut); }
+/* cover */
+.cover { padding: 0; background: radial-gradient(ellipse at 50% 38%, #1b1b1b 0%, #0D0D0D 62%); text-align: center; }
+.cover .logo { margin: 24mm auto 0; width: 98mm; display: block; }
+.cover .ttl { font-family: "Noto Kufi Arabic"; font-weight: 700; font-size: 27pt; line-height: 1.5; color: var(--copper); margin: 11mm 18mm 3mm; }
+.cover .sub { font-size: 13pt; color: #d8d1c6; margin: 0 24mm; }
+.cover .bar { height: .7mm; width: 40mm; background: var(--ember); margin: 9mm auto; }
+.cover .meta { font-size: 10.5pt; color: var(--mut); line-height: 2; }
+.cover .meta b { color: #f0e9de; font-family: "Noto Kufi Arabic"; font-weight: 600; }
+.cover .conf { position: absolute; bottom: 14mm; right: 0; left: 0; font-size: 8.8pt; color: var(--mut); }
+.stripe { position: absolute; bottom: 0; left: 0; right: 0; height: 4mm; background: linear-gradient(90deg, var(--steel), var(--copper) 55%, var(--ember)); }
+/* timeline */
+.phase { display: grid; grid-template-columns: 22mm 1fr; margin-bottom: 5mm; background: var(--char); border: .3mm solid var(--steel); }
+.phase .n { background: var(--copper); color: var(--ink); font-family: "Noto Kufi Arabic"; font-weight: 700; font-size: 22pt; display: flex; align-items: center; justify-content: center; }
+.phase .b { padding: 4mm 5mm; }
+.phase .b p { margin: 0 0 1.5mm; font-size: 10pt; color: #cfc8bf; line-height: 1.75; }
+.kv { display: flex; gap: 6mm; margin-top: 2mm; font-size: 9.4pt; }
+.kv span b { color: var(--copper); font-family: "Noto Kufi Arabic"; font-weight: 600; margin-left: 1.5mm; }
+.contact { border: .3mm dashed var(--copper); padding: 5mm 6mm; }
+.contact div { display: flex; border-bottom: .3mm solid var(--steel); padding: 2mm 0; }
+.contact div:last-child { border: 0; }
+.contact span { width: 38mm; color: var(--mut); }
+</style>
+</head>
+<body>
+
+<!-- ===== 1. COVER ===== -->
+<section class="page cover">
+  <img class="logo" src="../public/brand/logo-primary.png" alt="آفاق تيتان">
+  <div class="ttl">مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</div>
+  <div class="sub">منظومة ليبية متكاملة بملكية كاملة وتقنيات مفتوحة المصدر</div>
+  <div class="bar"></div>
+  <div class="meta"><b>آفاق تيتان للهندسة وأنظمة المركبات الخاصة</b><br>نصمم، نصنع، نجهز<br>أكتوبر 2026</div>
+  <div class="conf">وثيقة سرية — معدّة للجهة المخاطَبة فقط ولا يجوز تداولها أو نسخها دون إذن كتابي</div>
+  <div class="stripe"></div>
+</section>
+
+<!-- ===== 2. EXEC SUMMARY ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">١</span>
+  <h1>الملخص التنفيذي</h1><div class="rule"></div>
+  <p class="lead">نقترح إنشاء منظومة قيادة ومراقبة متنقلة تمنح غرفة العمليات صورة حيّة وموثّقة لما يجري في الميدان: مواقع الدوريات والضباط، وبث الكاميرات المباشر، والتسجيل المحلي، وبلاغات الاستغاثة، وتوزيع المهام، وكل ذلك بواجهة عربية بالكامل.</p>
+  <p>تختلف هذه المنظومة عن العروض الجاهزة في أربعة أمور جوهرية:</p>
+  <div class="grid2" style="margin: 5mm 0">
+    <div class="card"><h3>ملكية كاملة</h3><p>الشيفرة المصدرية والبيانات وقواعد التشغيل ملك للجهة المستفيدة، لا ترخيص مؤجَّر ولا اعتماد على مزوّد.</p></div>
+    <div class="card"><h3>عربية أولاً</h3><p>واجهة وتقارير وتنبيهات بالعربية من الأساس، لا ترجمة ملحقة بنظام أجنبي.</p></div>
+    <div class="card"><h3>داخل ليبيا بالكامل</h3><p>الخوادم والتسجيلات والخرائط داخل البلاد، دون أي اتصال بخوادم خارجية، ويمكن إثبات ذلك عملياً.</p></div>
+    <div class="card"><h3>بلا رسوم تراخيص دورية</h3><p>لا رسوم لكل جهاز ولا اشتراكات دعم شهرية مفتوحة المدة؛ التوسع يعتمد على التجهيزات لا على التراخيص.</p></div>
+  </div>
+  <p>نعتمد في البناء على محركات مفتوحة المصدر مجرَّبة عالمياً، نُهندسها ونربطها ونطوّر فوقها غرفة عمليات عربية مملوكة. ونقترح مساراً من ثلاث مراحل يبدأ بعرض حيّ مصغّر ثم مرحلة تجريبية ثم التوسع على مستوى المدينة، بحيث يُبنى كل ما يُستثمر فيه فعلياً ويُعاد استخدامه في المرحلة التالية.</p>
+  <div class="quote">الهدف ليس شراء منظومة، بل امتلاك قدرة وطنية تعمل وتتطور بأيدٍ ليبية.</div>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>٢</b></div>
+</section>
+
+<!-- ===== 3. CURRENT SITUATION ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٢</span>
+  <h1>الحالة الراهنة</h1><div class="rule"></div>
+  <p class="lead">تعمل الدوريات اليوم في الغالب بوسائل اتصال منفصلة، وتفتقر القيادة إلى صورة موحّدة وآنية لما يجري في الميدان.</p>
+  <div class="grid2" style="margin-top: 6mm">
+    <div class="card"><h3>دوريات دون إشراف موحّد</h3><p>لا توجد شاشة واحدة تُظهر مواقع الوحدات وحالتها، ويعتمد التنسيق على الاتصال الشفهي المتفرّق.</p></div>
+    <div class="card"><h3>تسجيلات مبعثرة أو غائبة</h3><p>إن وُجدت التسجيلات فهي على أجهزة منفردة يصعب جمعها، وإن غابت فلا مرجع موثّق عند وقوع حادثة.</p></div>
+    <div class="card"><h3>غياب الصورة التشغيلية</h3><p>لا يملك القائد رؤية حيّة تساعده على قرار سريع: أين أقرب دورية؟ ومن يستجيب لاستغاثة ضابط؟</p></div>
+    <div class="card"><h3>اعتماد كامل على العروض الأجنبية</h3><p>كل عرض مستلم مرتبط بمزوّد خارجي وبأسعار وشروط لا تملك الجهة التحكم فيها.</p></div>
+  </div>
+  <h2>ما الذي تحتاجه الجهة فعلاً؟</h2>
+  <ul class="chk">
+    <li>رؤية حيّة لمواقع الدوريات والضباط على خريطة مصراتة.</li>
+    <li>بث مباشر من كاميرات المركبات وكاميرات الضباط.</li>
+    <li>تسجيل محلي موثّق يُحفظ ويُراجَع وفق سياسة احتفاظ واضحة.</li>
+    <li>زر استغاثة وتوزيع مهام ومتابعة حالتها حتى الإنجاز.</li>
+    <li>منظومة تعمل بلا إنترنت دولي ولا تخضع لقرار جهة خارجية.</li>
+  </ul>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>٣</b></div>
+</section>
+
+<!-- ===== 4. PROBLEM WITH OFF-THE-SHELF ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٣</span>
+  <h1>المشكلة مع الحلول الجاهزة</h1><div class="rule"></div>
+  <p class="lead">أظهرت العروض الأجنبية التي جرى استعراضها نمطاً متكرراً يحوّل الجهة من مالكة للمنظومة إلى مستأجرة لها.</p>
+  <table style="margin-top: 5mm">
+    <tr><th style="width:42mm">النقطة</th><th>ما تعنيه عملياً</th></tr>
+    <tr><td><b>رسوم لكل جهاز</b></td><td>كلفة تزداد مع كل سيارة وكاميرا تُضاف، وتتكرر دورياً دون سقف معلن.</td></tr>
+    <tr><td><b>دعم شهري دائم</b></td><td>اشتراك دعم لا ينتهي؛ وتوقفه يعني توقف الخدمة أو التحديثات.</td></tr>
+    <tr><td><b>الشيفرة المصدرية</b></td><td>غير متاحة، أو متاحة بسعر يُترك لتقدير الجهة دون تحديد، فلا قدرة على التطوير أو التدقيق.</td></tr>
+    <tr><td><b>ترخيص وخوادم خارج ليبيا</b></td><td>بيانات تشغيلية حساسة قد تمرّ أو تُخزَّن خارج البلاد، ويمكن تعطيل المنظومة عن بُعد.</td></tr>
+    <tr><td><b>دعم عربي ضعيف</b></td><td>واجهات مترجمة جزئياً، وتقارير لا تراعي الاتجاه والخطوط والمصطلح الأمني المحلي.</td></tr>
+    <tr><td><b>الارتهان للمزوّد</b></td><td>لا مخرج عملياً: الانتقال إلى مزوّد آخر يعني البدء من الصفر.</td></tr>
+  </table>
+  <div class="quote" style="margin-top: 8mm">حين يكون المفتاح بيد المزوّد، تصبح السيادة التشغيلية بنداً في عقد قابل للتعديل.</div>
+  <p class="note" style="margin-top: 5mm">ملاحظة: يعتمد هذا القسم على العروض التي استُلمت في إطار المناقصة، وتُقدَّم تفاصيل المقارنة في الاجتماع الفني عند الطلب.</p>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>٤</b></div>
+</section>
+
+<!-- ===== 5. PROPOSED SYSTEM ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٤</span>
+  <h1>المنظومة المقترحة</h1><div class="rule"></div>
+  <p class="lead">منظومة من أربع طبقات مترابطة، تبدأ من المركبة والضابط في الميدان وتنتهي بغرفة عمليات عربية داخل مركز بيانات محلي.</p>
+  <div class="grid2" style="margin-top: 5mm">
+    <div class="card"><h3>وحدة المركبة</h3><p>ست كاميرات (أمامية، أمامية بتقريب، خلفية، جانبيتان، داخلية)، وتحديد مواقع GPS، وزر استغاثة، ومانع تشغيل المحرك بتفويض مزدوج.</p></div>
+    <div class="card"><h3>كاميرا الضابط</h3><p>كاميرا صدر ببث مباشر إلى غرفة العمليات، وزر استغاثة وتتبّع لموقع الضابط وحالة بطارية الجهاز.</p></div>
+    <div class="card"><h3>مركز القيادة المحلي</h3><p>خوادم داخل ليبيا لاستقبال البث والتسجيل والخرائط وقاعدة البيانات، مع غرفة عمليات بواجهة عربية كاملة.</p></div>
+    <div class="card"><h3>الذكاء الاصطناعي على الكاميرات</h3><p>رصد الأشخاص والمركبات وإصدار تنبيه فوري للمشغّل، وتتسع المراحل اللاحقة لإدارة الحوادث والتعرف على اللوحات الليبية.</p></div>
+  </div>
+  <h2>ما تقدّمه غرفة العمليات</h2>
+  <ul class="chk">
+    <li>خريطة حيّة لمصراتة تعمل دون إنترنت، بوحدات تتحرك لحظياً.</li>
+    <li>شجرة وحدات للدوريات والضباط مع البحث وحالة كل وحدة.</li>
+    <li>بث مباشر لكاميرا واحدة أو لجميع كاميرات المركبة معاً.</li>
+    <li>تنبيهات فورية، ومهام بحالات (جديدة، مستلمة، جاري التنفيذ، منجزة).</li>
+    <li>سجل تدقيق يوثّق من شاهد ماذا ومتى، وتقارير تشغيلية دورية.</li>
+    <li>لا يُعرض موقع قديم كأنه حيّ: الوحدة المنقطعة تظهر رمادية بآخر اتصال معلوم.</li>
+  </ul>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>٥</b></div>
+</section>
+
+<!-- ===== 6. ARCHITECTURE DIAGRAM ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٤</span>
+  <h1>مخطط المنظومة</h1><div class="rule"></div>
+  <p>يوضح المخطط تدفق البيانات من الميدان إلى المركز، وجميعها داخل شبكة محلية مؤمّنة دون أي مسار إلى الخارج.</p>
+  <svg viewBox="0 0 700 520" width="100%" style="margin: 4mm 0 2mm" font-family="Noto Kufi Arabic">
+    <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#EA6600"/></marker></defs>
+    <!-- field -->
+    <rect x="470" y="20" width="210" height="470" fill="#1C1C1C" stroke="#3A3A3A"/>
+    <text x="575" y="46" text-anchor="middle" fill="#B87333" font-size="15" font-weight="600">الميدان</text>
+    <g font-size="12.5" text-anchor="middle" fill="#e6e1da">
+      <rect x="490" y="66" width="170" height="82" fill="#0D0D0D" stroke="#B87333"/><text x="575" y="92" font-weight="600">وحدة المركبة</text><text x="575" y="114" fill="#9b948a" font-size="11">٦ كاميرات · GPS · استغاثة</text><text x="575" y="134" fill="#9b948a" font-size="11">مانع تشغيل بتفويض مزدوج</text>
+      <rect x="490" y="166" width="170" height="70" fill="#0D0D0D" stroke="#B87333"/><text x="575" y="192" font-weight="600">كاميرا الضابط</text><text x="575" y="214" fill="#9b948a" font-size="11">بث مباشر · استغاثة · موقع</text>
+      <rect x="490" y="254" width="170" height="60" fill="#0D0D0D" stroke="#3A3A3A"/><text x="575" y="278" font-weight="600">كاميرات ثابتة</text><text x="575" y="298" fill="#9b948a" font-size="11">للتوسع المستقبلي</text>
+      <rect x="490" y="338" width="170" height="130" fill="none" stroke="#3A3A3A" stroke-dasharray="4 4"/><text x="575" y="400" fill="#9b948a" font-size="11">أجهزة ميدانية إضافية</text><text x="575" y="420" fill="#9b948a" font-size="11">تُضاف دون تغيير المعمارية</text>
+    </g>
+    <!-- network -->
+    <rect x="300" y="20" width="130" height="470" fill="#0D0D0D" stroke="#B87333" stroke-dasharray="6 5"/>
+    <text x="365" y="44" text-anchor="middle" fill="#B87333" font-size="14" font-weight="600">شبكة محلية</text><text x="365" y="63" text-anchor="middle" fill="#B87333" font-size="14" font-weight="600">مؤمّنة</text>
+    <g fill="#9b948a" font-size="11" text-anchor="middle"><text x="365" y="250">اتصال مشفّر</text><text x="365" y="270">داخل ليبيا فقط</text></g>
+    <line x1="488" y1="107" x2="432" y2="200" stroke="#EA6600" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="488" y1="201" x2="432" y2="225" stroke="#EA6600" stroke-width="2" marker-end="url(#ar)"/>
+    <line x1="488" y1="284" x2="432" y2="260" stroke="#EA6600" stroke-width="2" marker-end="url(#ar)"/>
+    <!-- center -->
+    <rect x="20" y="20" width="260" height="470" fill="#1C1C1C" stroke="#3A3A3A"/>
+    <text x="150" y="46" text-anchor="middle" fill="#B87333" font-size="15" font-weight="600">مركز القيادة المحلي</text>
+    <g font-size="12" text-anchor="middle" fill="#e6e1da">
+      <rect x="36" y="64" width="228" height="48" fill="#0D0D0D" stroke="#3A3A3A"/><text x="150" y="92">استقبال البث والتسجيل المحلي</text>
+      <rect x="36" y="122" width="228" height="48" fill="#0D0D0D" stroke="#3A3A3A"/><text x="150" y="150">تتبّع المواقع والرسائل اللحظية</text>
+      <rect x="36" y="180" width="228" height="48" fill="#0D0D0D" stroke="#3A3A3A"/><text x="150" y="208">قاعدة البيانات وسجل التدقيق</text>
+      <rect x="36" y="238" width="228" height="48" fill="#0D0D0D" stroke="#3A3A3A"/><text x="150" y="266">الذكاء الاصطناعي لتحليل الكاميرات</text>
+      <rect x="36" y="296" width="228" height="48" fill="#0D0D0D" stroke="#3A3A3A"/><text x="150" y="324">خرائط محلية دون إنترنت</text>
+      <rect x="36" y="366" width="228" height="106" fill="#0D0D0D" stroke="#B87333" stroke-width="1.6"/><text x="150" y="400" fill="#B87333" font-size="14" font-weight="600">غرفة العمليات العربية</text><text x="150" y="424" fill="#9b948a" font-size="11">خريطة · بث مباشر · تنبيهات</text><text x="150" y="444" fill="#9b948a" font-size="11">مهام · تدقيق · تقارير</text>
+    </g>
+    <line x1="298" y1="240" x2="282" y2="240" stroke="#EA6600" stroke-width="2" marker-end="url(#ar)"/>
+  </svg>
+  <p class="note">جميع المكونات تعمل داخل ليبيا. ويمكن إثبات ذلك عملياً بفصل المنظومة عن الإنترنت أثناء العرض ومتابعة التشغيل دون أي انقطاع.</p>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>٦</b></div>
+</section>
+
+<!-- ===== 7. METHODOLOGY ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٥</span>
+  <h1>منهجنا: هندسة محلية على محركات مفتوحة المصدر</h1><div class="rule"></div>
+  <p class="lead">لا نبدأ من الصفر في كل مكوّن، ولا نشتري منظومة مغلقة. نختار محركات عالمية مجرَّبة ومفتوحة المصدر، ثم نُهندس تكاملها ونطوّر فوقها ما يخص احتياج الجهة، فتبقى المنظومة كلها ملكاً لها.</p>
+  <div class="quote" style="margin: 6mm 0">البناء بإسمنت ممتاز لا يجعل أحداً «مشغّل إسمنت»؛ بل يجعله المهندس والبنّاء. القوالب الصناعية الجاهزة هي المادة، والمنظومة هي البناء.</div>
+  <h2>المحركات المعتمدة في التصميم</h2>
+  <table>
+    <tr><th style="width:44mm">المحرك</th><th>الدور في المنظومة</th></tr>
+    <tr><td class="ltr">MediaMTX</td><td>استقبال البث المباشر من الكاميرات وتوزيعه على غرفة العمليات بزمن تأخير منخفض.</td></tr>
+    <tr><td class="ltr">Frigate</td><td>تحليل الفيديو بالذكاء الاصطناعي ورصد الأشخاص والمركبات.</td></tr>
+    <tr><td class="ltr">Traccar</td><td>استقبال بيانات الموقع من أجهزة التتبّع وإدارة الأجهزة.</td></tr>
+    <tr><td class="ltr">PostgreSQL</td><td>قاعدة البيانات الرئيسية للوحدات والمهام وسجل التدقيق.</td></tr>
+    <tr><td class="ltr">MQTT</td><td>رسائل لحظية خفيفة بين الأجهزة ومركز القيادة، ومنها الاستغاثة.</td></tr>
+    <tr><td class="ltr">OpenStreetMap</td><td>بيانات خرائط مفتوحة تُخزَّن محلياً فتعمل الخريطة دون اتصال.</td></tr>
+  </table>
+  <h2>ما الذي نبنيه نحن؟</h2>
+  <ul class="chk">
+    <li>غرفة العمليات العربية بكامل واجهاتها وتقاريرها.</li>
+    <li>طبقة التكامل التي تربط المحركات ببعضها وبالأجهزة الميدانية.</li>
+    <li>منطق الاستغاثة والتفويض المزدوج وسجل التدقيق المقاوم للتلاعب.</li>
+    <li>التركيب والتدريب والتحديث المستمر.</li>
+  </ul>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>٧</b></div>
+</section>
+
+<!-- ===== 8. GUARANTEES ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٦</span>
+  <h1>الضمانات</h1><div class="rule"></div>
+  <p class="lead">نقدّم التزامات يمكن التحقق منها عملياً، لا وعوداً عامة.</p>
+  <div class="grid2" style="margin-top: 5mm">
+    <div class="card"><h3>ملكية الشيفرة والبيانات</h3><p>تُسلَّم الشيفرة المصدرية الكاملة للمنظومة المطوَّرة مع وثائقها، وتبقى البيانات التشغيلية والتسجيلات ملكاً حصرياً للجهة.</p></div>
+    <div class="card"><h3>انعدام الاتصال الخارجي بإثبات عملي</h3><p>تعمل المنظومة دون إنترنت. ويمكن في أي وقت فصل الشبكة الخارجية ومراقبة أن التشغيل لا يتأثر، ومراجعة سجلات الشبكة.</p></div>
+    <div class="card"><h3>سياسة احتفاظ وسجل تدقيق</h3><p>تُحدَّد مدة حفظ التسجيلات بقرار الجهة، ويُسجَّل كل اطلاع وتصدير وحذف في سجل تدقيق يصعب التلاعب به أو إخفاء أثره.</p></div>
+    <div class="card"><h3>تفويض مزدوج للإجراءات الحساسة</h3><p>الإجراءات الحساسة، مثل إيقاف محرك مركبة عن بُعد، لا تُنفَّذ إلا بتفويضين مستقلين وتُوثَّق كاملة.</p></div>
+    <div class="card"><h3>واجهة عربية أولاً</h3><p>اللغة الرسمية لكل شاشة وتقرير وتنبيه هي العربية، بالاتجاه والخطوط والمصطلحات المناسبة للعمل الأمني.</p></div>
+    <div class="card"><h3>الاستمرارية والاستقلال</h3><p>لا يتوقف التشغيل بانتهاء عقد دعم؛ فالجهة تملك ما يلزم لتشغيل المنظومة وصيانتها بنفسها أو عبر أي جهة ليبية.</p></div>
+  </div>
+  <div class="quote" style="margin-top: 8mm">نعرض هذه المنظومة وهي تعمل دون إنترنت، لأن أقوى ضمان هو ما يراه صاحب القرار بعينه.</div>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>٨</b></div>
+</section>
+
+<!-- ===== 9. COMPANY ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٧</span>
+  <h1>آفاق تيتان</h1><div class="rule"></div>
+  <p class="lead">آفاق تيتان للهندسة وأنظمة المركبات الخاصة شركة هندسية تجمع التصميم والتصنيع والتجهيز في منظومة عمل واحدة: <b style="color:#B87333">نصمم، نصنع، نجهز.</b></p>
+  <p>هويتنا قائمة على الدقة والاعتمادية والقدرة على التنفيذ، وحضورنا محلي يتيح لنا الإشراف على التركيب والتشغيل والدعم من داخل ليبيا مباشرة.</p>
+  <h2>دورنا في هذا المشروع</h2>
+  <div class="grid3">
+    <div class="card plain"><h3>التطوير</h3><p>غرفة العمليات العربية وطبقة التكامل ومنطق التشغيل.</p></div>
+    <div class="card plain"><h3>التكامل</h3><p>ربط المحركات مفتوحة المصدر بالأجهزة الميدانية والخرائط والكاميرات.</p></div>
+    <div class="card plain"><h3>التركيب</h3><p>تجهيز المركبات وتركيب الكاميرات والأجهزة وفق معايير الصناعة.</p></div>
+    <div class="card plain"><h3>التدريب</h3><p>تدريب المشغّلين والمشرفين والفنيين على التشغيل اليومي والطوارئ.</p></div>
+    <div class="card plain"><h3>الدعم</h3><p>صيانة وتحديثات ومتابعة أداء، دون ارتهان بعقد غير محدد.</p></div>
+    <div class="card plain"><h3>التوسع</h3><p>إضافة وحدات وكاميرات ومراكز جديدة على المعمارية نفسها.</p></div>
+  </div>
+  <h2>لماذا نحن؟</h2>
+  <ul class="chk">
+    <li>خبرة في تجهيز المركبات الخاصة تتصل مباشرة بتركيب هذه المنظومة وتشغيلها.</li>
+    <li>فريق هندسي يطوّر البرمجيات ويتولى التركيب الميداني، فلا حلقة وسيطة تُضيّع المسؤولية.</li>
+    <li>التزام بأن تبقى المنظومة مملوكة للجهة وقابلة للانتقال إلى أي جهة تشغيل ليبية.</li>
+  </ul>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>٩</b></div>
+</section>
+
+<!-- ===== 10. PLAN ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٨</span>
+  <h1>خطة التنفيذ</h1><div class="rule"></div>
+  <p class="lead">ثلاث مراحل متدرجة، يُبنى في كل منها ما يُعاد استخدامه في التالية، ويُتخذ قرار المتابعة بعد كل مرحلة بناءً على ما شوهد فعلياً.</p>
+  <div style="margin-top: 5mm">
+    <div class="phase"><div class="n">١</div><div class="b"><h3>عرض توضيحي حي على نطاق مصغّر</h3><p>تشغيل غرفة العمليات بوحدات قليلة أمام الجهة، مع إثبات العمل دون إنترنت، والاطلاع على البث والاستغاثة وتوزيع المهام.</p><div class="kv"><span><b>المدة:</b>نحو أسبوعين</span><span><b>المخرج:</b>منظومة عاملة قابلة للتقييم المباشر</span></div></div></div>
+    <div class="phase"><div class="n">٢</div><div class="b"><h3>مرحلة تجريبية</h3><p>٥ سيارات و١٠ ضباط و٥٠ كاميرا ذكية في الميدان، مع التدريب والتشغيل الفعلي وقياس الأداء وتحسين الواجهات والتقارير.</p><div class="kv"><span><b>المدة:</b>نحو ثلاثة أشهر</span><span><b>المخرج:</b>تشغيل ميداني موثّق وتقرير أداء</span></div></div></div>
+    <div class="phase"><div class="n">٣</div><div class="b"><h3>التوسع على مستوى المدينة</h3><p>زيادة عدد المركبات والضباط والكاميرات، وإضافة إدارة الحوادث والتعرف على اللوحات الليبية، وتوسيع مركز البيانات.</p><div class="kv"><span><b>المدة:</b>بحسب حجم النشر</span><span><b>المخرج:</b>منظومة مدينة متكاملة</span></div></div></div>
+  </div>
+  <div class="card" style="margin-top: 2mm"><p>نحو ٩٦٪ من استثمار العرض التوضيحي ينتقل مباشرةً إلى المرحلة التجريبية، فلا شيء يُهدر. والمدد المذكورة تقديرية وتُثبَّت في العرض الفني بعد الاجتماع.</p></div>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>١٠</b></div>
+</section>
+
+<!-- ===== 11. NEXT STEPS ===== -->
+<section class="page">
+  <div class="hd"><img src="../public/brand/symbol.png" alt=""><span>مقترح إنشاء منظومة القيادة والمراقبة المتنقلة</span></div>
+  <span class="num">٩</span>
+  <h1>الخطوات التالية</h1><div class="rule"></div>
+  <p class="lead">نقترح مساراً قصيراً وواضحاً يمنح الجهة ما يلزم لاتخاذ قرارها بثقة.</p>
+  <div class="grid3" style="margin: 6mm 0">
+    <div class="card"><span class="tag">أولاً</span><h3 style="margin-top:2mm">اعتماد العرض التوضيحي</h3><p>موافقة الجهة على المرحلة الأولى وتحديد موعد التنفيذ.</p></div>
+    <div class="card"><span class="tag">ثانياً</span><h3 style="margin-top:2mm">اجتماع فني</h3><p>مناقشة المتطلبات والمعمارية ونطاق المرحلة التجريبية مع الفريق المختص.</p></div>
+    <div class="card"><span class="tag">ثالثاً</span><h3 style="margin-top:2mm">العرض الفني والمالي</h3><p>وثيقة مفصّلة بالنطاق والجدول والكلفة وشروط التسليم والملكية.</p></div>
+  </div>
+  <div class="quote">تفاصيل العرض الفني والمالي تُقدَّم في وثيقة مستقلة بعد الاجتماع.</div>
+  <h2>بيانات التواصل</h2>
+  <div class="contact">
+    <div><span>الاسم</span>[الاسم الكامل]</div>
+    <div><span>المسمى الوظيفي</span>[المسمى الوظيفي]</div>
+    <div><span>الهاتف</span><b class="ltr">[رقم الهاتف]</b></div>
+    <div><span>البريد الإلكتروني</span><b class="ltr">[البريد الإلكتروني]</b></div>
+    <div><span>العنوان</span>[العنوان — مصراتة، ليبيا]</div>
+  </div>
+  <div style="text-align:center; margin-top: 14mm"><img src="../public/brand/symbol.png" style="height: 22mm" alt=""><div style="font-family:'Noto Kufi Arabic'; color:#B87333; font-weight:600; margin-top:2mm">نصمم، نصنع، نجهز</div></div>
+  <div class="ft"><span>آفاق تيتان — وثيقة سرية</span><b>١١</b></div>
+</section>
+</body>
+</html>

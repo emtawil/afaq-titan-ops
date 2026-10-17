@@ -1,0 +1,85 @@
+{
+  "name": "afaq-titan-ops",
+  "version": "1.0.0",
+  "description": "منصة القيادة والمراقبة — آفاق تيتان",
+  "main": "electron/main.js",
+  "author": "آفاق تيتان",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "electron": "electron .",
+    "start": "next build && electron .",
+    "tiles": "node scripts/download-tiles.mjs",
+    "windowed": "AFAQ_WINDOWED=1 electron .",
+    "icon": "python3 scripts/make-icon.py",
+    "dist:portable": "next build && electron-builder --win portable",
+    "dist:installer": "next build && electron-builder --win nsis",
+    "dist:dir": "next build && electron-builder --win --dir"
+  },
+  "build": {
+    "appId": "ly.afaq.titan.ops",
+    "productName": "AfaqTitanOps",
+    "copyright": "© 2026 آفاق تيتان للهندسة وأنظمة المركبات الخاصة",
+    "directories": {
+      "output": "release",
+      "buildResources": "build-resources"
+    },
+    "files": [
+      "out/**/*",
+      "electron/**/*",
+      "public/brand/**/*",
+      "public/fonts/**/*",
+      "public/tiles/**/*",
+      "public/feeds/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "icon": "build-resources/icon.ico",
+      "artifactName": "AfaqTitanOps.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "آفاق تيتان",
+      "installerIcon": "build-resources/icon.ico",
+      "uninstallerIcon": "build-resources/icon.ico",
+      "installerHeaderIcon": "build-resources/icon.ico"
+    },
+    "portable": {
+      "artifactName": "AfaqTitanOps.exe"
+    }
+  },
+  "dependencies": {
+    "@fontsource/noto-kufi-arabic": "^5.3.0",
+    "@fontsource/noto-sans-arabic": "^5.3.0",
+    "@radix-ui/react-dialog": "^1.3.1",
+    "@radix-ui/react-slot": "^1.5.0",
+    "autoprefixer": "^10.6.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "leaflet": "1.9",
+    "lucide-react": "^1.57.0",
+    "next": "^14.2.35",
+    "postcss": "^8.5.30",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "^3.4.19"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^22.20.5",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "electron": "^44.7.2",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.6.3"
+  }
+}
